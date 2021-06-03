@@ -9,7 +9,7 @@ import get from 'lodash/get';
 
 export const initialState = { songName: null, songsData: {}, error: null };
 
-export const { Types: HomeContainerTypes, Creators: HomeContainerCreators } = createActions({
+export const { Types: HomeContainerTypes, Creators: homeContainerCreators } = createActions({
   requestGetSongs: ['songName'],
   successGetSongs: ['songsData'],
   failureGetSongs: ['error'],

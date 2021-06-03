@@ -11,7 +11,7 @@ import { Card, Input } from 'antd';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { useInjectReducer } from '@utils/injectReducer';
-import reducer, { HomeContainerCreators } from './reducer';
+import reducer, { homeContainerCreators } from './reducer';
 import get from 'lodash/get';
 import If from '@components/If';
 import Search from 'antd/es/input/Search';
@@ -19,7 +19,7 @@ import Search from 'antd/es/input/Search';
 const SearchBoxContainer = styled(Card)`
   && {
     text-align: center;
-    margin: 20px auto;
+    margin: 1.25em auto;
   }
 `;
 const MusicBoxContainer = styled.div`
@@ -28,18 +28,18 @@ const MusicBoxContainer = styled.div`
     flex-wrap: wrap;
     gap: 1rem;
     width: 90%;
-    margin: 20px auto;
-    max-height: 35rem;
+    margin: 1.25em auto;
+    max-height: 50em;
     overflow: scroll;
   }
 `;
 const SongContainer = styled(Card)`
   && {
-    min-height: 13rem;
+    min-height: 14em;
     position: relative;
     box-sizing: border-box;
     width: 31%;
-    border-radius: 6px;
+    border-radius: 0.6em;
     margin: 0.6rem auto;
   }
 `;
@@ -55,14 +55,14 @@ const SongPrimary = styled.div`
   && {
     margin: 0.6rem 0 0.3rem 0;
     width: 95%;
-    font-size: 1.1rem;
+    font-size: 1.1em;
     color: #083445;
   }
 `;
 const SongSecondary = styled.div`
   && {
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    margin-bottom: 1em;
+    font-size: 1em;
     color: #149cd0;
   }
 `;
@@ -77,11 +77,10 @@ const AudioBox = styled.audio`
 export function HomeContainer({ dispatchSongs, songsData, songName }) {
   useInjectReducer({ key: 'HomeContainer', reducer });
   useInjectSaga({ key: 'HomeContainer', saga });
-  const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleOnSubmit = () => {
-    dispatchSongs(value);
+  const handleOnSubmit = e => {
+    dispatchSongs(e);
     setLoading(true);
   };
   const renderSongs = () => {
@@ -104,8 +103,7 @@ export function HomeContainer({ dispatchSongs, songsData, songName }) {
           placeholder="Enter the Song Name"
           style={{ width: '60%', margin: '0 auto' }}
           type="text"
-          onChange={e => setValue(e.target.value)}
-          onPressEnter={handleOnSubmit}
+          onPressEnter={e => handleOnSubmit(e.target.value)}
         />
       </SearchBoxContainer>
       <If condition={loading}>
@@ -128,7 +126,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  const { requestGetSongs, clearSongsPlaylist } = HomeContainerCreators;
+  const { requestGetSongs, clearSongsPlaylist } = homeContainerCreators;
   return {
     dispatchSongs: songName => {
       dispatch(requestGetSongs(songName));
