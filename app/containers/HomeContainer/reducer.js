@@ -1,8 +1,3 @@
-/*
- *
- * HomeContainer reducer
- *
- */
 import produce from 'immer';
 import { createActions } from 'reduxsauce';
 import get from 'lodash/get';

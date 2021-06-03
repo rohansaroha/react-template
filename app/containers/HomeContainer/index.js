@@ -15,6 +15,7 @@ import reducer, { homeContainerCreators } from './reducer';
 import get from 'lodash/get';
 import If from '@components/If';
 import Search from 'antd/es/input/Search';
+import SoundCard from '@components/SoundCard';
 
 const SearchBoxContainer = styled(Card)`
   && {
@@ -33,46 +34,6 @@ const MusicBoxContainer = styled.div`
     overflow: scroll;
   }
 `;
-const SongContainer = styled(Card)`
-  && {
-    min-height: 14em;
-    position: relative;
-    box-sizing: border-box;
-    width: 31%;
-    border-radius: 0.6em;
-    margin: 0.6rem auto;
-  }
-`;
-const SearchBox = styled(Input)`
-  && {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    width: 60%;
-  }
-`;
-const SongPrimary = styled.div`
-  && {
-    margin: 0.6rem 0 0.3rem 0;
-    width: 95%;
-    font-size: 1.1em;
-    color: #083445;
-  }
-`;
-const SongSecondary = styled.div`
-  && {
-    margin-bottom: 1em;
-    font-size: 1em;
-    color: #149cd0;
-  }
-`;
-const AudioBox = styled.audio`
-  && {
-    width: 85%;
-    position: absolute;
-    bottom: 1rem;
-  }
-`;
 
 export function HomeContainer({ dispatchSongs, songsData, songName }) {
   useInjectReducer({ key: 'HomeContainer', reducer });
@@ -85,15 +46,7 @@ export function HomeContainer({ dispatchSongs, songsData, songName }) {
   };
   const renderSongs = () => {
     const songs = get(songsData, 'results', []);
-    return songs.map(song => (
-      <SongContainer key={song.trackId}>
-        <SongPrimary>{song.trackName}</SongPrimary>
-        <SongSecondary>{song.artistName}</SongSecondary>
-        <AudioBox controls>
-          <source src={song.previewUrl} />
-        </AudioBox>
-      </SongContainer>
-    ));
+    return <SoundCard songs={songs} />;
   };
 
   return (
