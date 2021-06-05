@@ -1,19 +1,19 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getSongs } from '@services/iTunesApi';
-import { HomeContainerTypes, homeContainerCreators } from './reducer';
-const { REQUEST_GET_SONGS } = HomeContainerTypes;
+import { homeContainerTypes, homeContainerCreators } from './reducer';
+const { REQUEST_GET_SONGS } = homeContainerTypes;
 const { successGetSongs, failureGetSongs } = homeContainerCreators;
 
-export function* defaultFunction(action) {
+export function* asyncGetSong(action) {
   const response = yield call(getSongs, action.songName);
   const { data, ok } = response;
   if (ok) {
-    yield put(successGetSongs(data));
+    yield put(successGetSongs(data.results));
   } else {
     yield put(failureGetSongs(data));
   }
 }
 
-export default function* HomeContainerSaga() {
-  yield takeLatest(REQUEST_GET_SONGS, defaultFunction);
+export default function* homeContainerSaga() {
+  yield takeLatest(REQUEST_GET_SONGS, asyncGetSong);
 }

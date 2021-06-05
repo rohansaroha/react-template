@@ -9,7 +9,7 @@ export function* asyncFunction(action) {
   const response = yield call(getSongs, action.collectionId);
   const { data, ok } = response;
   if (ok) {
-    yield put(successGetSong(data));
+    yield put(successGetSong(data.results));
   } else {
     yield put(failureGetSong(data));
   }

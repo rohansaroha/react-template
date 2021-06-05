@@ -2,13 +2,9 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 import get from 'lodash/get';
 
-/**
- * Direct selector to the trackContainer state domain
- */
+export const selectTrackContainerDomain = state => state.trackContainer || initialState;
 
-const selectTrackContainerDomain = state => state.trackContainer || initialState;
-
-export const makeSelectTrackContainer = () =>
+export const selectTrackContainer = () =>
   createSelector(
     selectTrackContainerDomain,
     substate => substate
@@ -23,7 +19,7 @@ export const selectCollectionId = () =>
     selectTrackContainerDomain,
     substate => get(substate, 'collectionId', null)
   );
-export const selectSongsError = () =>
+export const selectSongError = () =>
   createSelector(
     selectTrackContainerDomain,
     substate => get(substate, 'songError', null)

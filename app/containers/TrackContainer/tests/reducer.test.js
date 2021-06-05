@@ -1,6 +1,6 @@
 // import produce from 'immer'
 import { fromJS } from 'immutable';
-import { trackContainerReducer, trackContainerTypes, initialState } from '../reducer';
+import trackContainerReducer, { trackContainerTypes, initialState } from '../reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('TrackContainer reducer tests', () => {
