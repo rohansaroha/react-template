@@ -1,12 +1,15 @@
+/**
+ *
+ * Tests for SoundCard
+ *
+ */
+
 import React from 'react';
+// import { fireEvent } from '@testing-library/dom'
 import { renderWithIntl } from '@utils/testUtils';
 import SoundCard from '../index';
 
-describe('<SoundCard /> tests', () => {
-  let submitSpy;
-  beforeEach(() => {
-    submitSpy = jest.fn();
-  });
+describe('<SoundCard />', () => {
   it('should render and match the snapshot', () => {
     const { baseElement } = renderWithIntl(<SoundCard />);
     expect(baseElement).toMatchSnapshot();

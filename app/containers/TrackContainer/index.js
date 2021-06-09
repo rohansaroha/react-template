@@ -32,9 +32,7 @@ export function TrackContainer({ dispatchSong, collectionId, songData, trackCont
 
   return (
     <div data-testid="track-container">
-      <Skeleton loading={loader} active>
-        <SoundCard songs={songData} complete={true} />
-      </Skeleton>
+      <SoundCard songs={songData} complete={true} loading={loader} />
     </div>
   );
 }
