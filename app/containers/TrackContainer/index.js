@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
@@ -8,20 +8,27 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { selectTrackContainer, selectSongError, selectSongData, selectCollectionId } from './selectors';
 import saga from './saga';
 import { trackContainerCreators } from './reducer';
-import { withRouter } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import SoundCard from 'components/SoundCard';
+import { Skeleton, Spin } from 'antd';
 
-export function TrackContainer(props) {
+export function TrackContainer({ dispatchSong, collectionId, songData, trackContainer }) {
+  const params = useParams();
   useInjectSaga({ key: 'trackContainer', saga });
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    const rawTrackId = props.location.pathname.split('/')[2];
-    props.dispatchSong(rawTrackId);
-  }, []);
+    if (params.id !== collectionId) {
+      dispatchSong(params.id);
+    }
+    setLoader(true);
+  });
 
   return (
-    <div>
-      <SoundCard songs={props.songData} complete={true} />
+    <div data-testid="track-container">
+      <Skeleton loading={loader} active>
+        <SoundCard songs={songData} complete={true} />
+      </Skeleton>
     </div>
   );
 }
@@ -58,7 +65,6 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-  withRouter,
   injectIntl
 )(TrackContainer);
 

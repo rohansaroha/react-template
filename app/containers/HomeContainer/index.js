@@ -7,16 +7,14 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { selectSongName, selectSongsData, selectSongsError } from './selectors';
 import saga from './saga';
 import styled from 'styled-components';
-import { Card } from 'antd';
+import { Card, Input, Spin } from 'antd';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import { homeContainerCreators } from './reducer';
 import If from '@components/If';
-import Search from 'antd/es/input/Search';
 import SoundCard from '@components/SoundCard';
-import Loadable from '@containers/HomeContainer/Loadable';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
+const { Search } = Input;
 
 const SearchBoxContainer = styled(Card)`
   && {
@@ -37,9 +35,14 @@ const SearchBox = styled(Search)`
     margin: 0 auto;
   }
 `;
+const Spinner = styled(Spin)`
+  && {
+    width: 100%;
+    margin: 0 auto;
+  }
+`;
 
 export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
-  // eslint-disable-next-line no-console
   useInjectSaga({ key: 'homeContainer', saga });
   const [loading, setLoading] = useState(true);
 
@@ -61,15 +64,16 @@ export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
     <div>
       <SearchBoxContainer>
         <SearchBox
+          data-testid="search-box"
           placeholder={intl.formatMessage({ id: 'search_song' })}
           type="text"
           onChange={evt => debouncedHandleOnChange(evt.target.value)}
           onSearch={searchText => debouncedHandleOnChange(searchText)}
         />
       </SearchBoxContainer>
-      <If condition={Loadable} otherwise={loading}>
+      <If condition={!loading} otherwise={<Spinner />}>
         <MusicBoxContainer>
-          <SoundCard songs={songsData} />
+          <SoundCard songs={songsData} complete={false} />
         </MusicBoxContainer>
       </If>
     </div>
@@ -107,8 +111,7 @@ const withConnect = connect(
 export default compose(
   injectIntl,
   withConnect,
-  memo,
-  withRouter
+  memo
 )(HomeContainer);
 
 export const HomeContainerTest = compose(injectIntl)(HomeContainer);

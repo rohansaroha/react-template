@@ -1,10 +1,3 @@
-/**
- * This file contains the application's colors.
- *
- * Define color here instead of duplicating them throughout the components.
- * That allows to change them more easily later on.
- */
-
 const primary = '#fcedda';
 const text = '#212529';
 const secondary = '#f8c49c';
