@@ -7,10 +7,9 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { selectSongName, selectSongsData, selectSongsError } from './selectors';
 import saga from './saga';
 import styled from 'styled-components';
-import { Card, Input, Skeleton, Spin } from 'antd';
+import { Card, Input, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import { homeContainerCreators } from './reducer';
-import get from 'lodash/get';
 import SoundCard from '@components/SoundCard';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
@@ -78,9 +77,7 @@ export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
         />
       </SearchBoxContainer>
       <MusicBoxContainer>
-        <Skeleton loading={loading} active>
-          <SoundCard songs={songsData} complete={false} />
-        </Skeleton>
+        <SoundCard songs={songsData} complete={false} loading={loading} />
       </MusicBoxContainer>
     </div>
   );
