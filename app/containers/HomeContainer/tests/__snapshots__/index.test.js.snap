@@ -49,24 +49,11 @@ exports[`<HomeContainer /> container tests should render and match the snapshot 
         </div>
       </div>
       <div
-        class="ant-spin ant-spin-spinning HomeContainer__Spinner-l0s8pp-3 cXIhOf"
+        class="HomeContainer__MusicBoxContainer-l0s8pp-1 hrKuyA"
       >
-        <span
-          class="ant-spin-dot ant-spin-dot-spin"
-        >
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-        </span>
+        <div
+          data-testid="sound-card"
+        />
       </div>
     </div>
   </div>

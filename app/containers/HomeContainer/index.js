@@ -7,10 +7,9 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { selectSongName, selectSongsData, selectSongsError } from './selectors';
 import saga from './saga';
 import styled from 'styled-components';
-import { Card, Input, Spin } from 'antd';
+import { Card, Input, Skeleton, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import { homeContainerCreators } from './reducer';
-import If from '@components/If';
 import SoundCard from '@components/SoundCard';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
@@ -44,18 +43,24 @@ const Spinner = styled(Spin)`
 
 export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
   useInjectSaga({ key: 'homeContainer', saga });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (songsData && loading) {
+      setLoading(false);
+    }
+  }, [songsData]);
 
   useEffect(() => {
     if (songName && !songsData?.items?.length) {
       dispatchSongs(songName);
-      setLoading(false);
+      setLoading(true);
     }
   }, []);
   const handleOnChange = sName => {
     if (!isEmpty(sName)) {
       dispatchSongs(sName);
-      setLoading(false);
+      setLoading(true);
     }
   };
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
@@ -71,11 +76,11 @@ export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
           onSearch={searchText => debouncedHandleOnChange(searchText)}
         />
       </SearchBoxContainer>
-      <If condition={!loading} otherwise={<Spinner />}>
-        <MusicBoxContainer>
+      <MusicBoxContainer>
+        <Skeleton loading={loading} active>
           <SoundCard songs={songsData} complete={false} />
-        </MusicBoxContainer>
-      </If>
+        </Skeleton>
+      </MusicBoxContainer>
     </div>
   );
 }
