@@ -10,7 +10,6 @@ import saga from './saga';
 import { trackContainerCreators } from './reducer';
 import { useParams } from 'react-router-dom';
 import SoundCard from 'components/SoundCard';
-import { Skeleton } from 'antd';
 
 export function TrackContainer({ dispatchSong, collectionId, songData, trackContainer }) {
   const params = useParams();
