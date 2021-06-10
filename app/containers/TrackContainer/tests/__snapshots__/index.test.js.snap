@@ -3,8 +3,12 @@
 exports[`<TrackContainer /> container tests should render and match the snapshot 1`] = `
 <body>
   <div>
-    <div>
-      TrackContainer
+    <div
+      data-testid="track-container"
+    >
+      <div
+        data-testid="sound-card"
+      />
     </div>
   </div>
 </body>

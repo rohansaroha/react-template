@@ -1,31 +1,25 @@
-/**
- *
- * Tests for TrackContainer
- *
- *
- */
-
 import React from 'react';
-import { renderProvider } from '@utils/testUtils';
+import { renderProvider, timeout } from '@utils/testUtils';
 import { TrackContainerTest as TrackContainer } from '../index';
-// import { fireEvent } from '@testing-library/dom'
 
 describe('<TrackContainer /> container tests', () => {
-  jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts
-    useParams: () => ({
-      id: '1234'
-    }),
-    useRouteMatch: () => ({ url: `/search?term=1234` })
-  }));
-
-  // let submitSpy
+  let submitSpy;
 
   beforeEach(() => {
-    // submitSpy = jest.fn()
+    submitSpy = jest.fn();
   });
   it('should render and match the snapshot', () => {
-    const { baseElement } = renderProvider(<TrackContainer />);
+    const { baseElement } = renderProvider(<TrackContainer dispatchSong={submitSpy} />);
     expect(baseElement).toMatchSnapshot();
+  });
+  it('should ensure that dispatch song is being called when collectionId changed', async () => {
+    renderProvider(<TrackContainer collectionId="124" dispatchSong={submitSpy} />);
+    await timeout(500);
+    expect(submitSpy).toBeCalled();
+  });
+  it('should ensure that dispatch song is not being called when collectionId is same', async () => {
+    renderProvider(<TrackContainer collectionId="123" dispatchSong={submitSpy} />);
+    await timeout(500);
+    expect(submitSpy).not.toHaveBeenCalled();
   });
 });
