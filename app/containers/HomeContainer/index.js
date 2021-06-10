@@ -7,13 +7,14 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { selectSongName, selectSongsData, selectSongsError } from './selectors';
 import saga from './saga';
 import styled from 'styled-components';
-import { Card, Input, Skeleton, Spin } from 'antd';
+import { Card, Input, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import { homeContainerCreators } from './reducer';
-import get from 'lodash/get';
 import SoundCard from '@components/SoundCard';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
+import For from '@components/For';
+import If from '@components/If';
 const { Search } = Input;
 
 const SearchBoxContainer = styled(Card)`
@@ -42,7 +43,7 @@ const Spinner = styled(Spin)`
   }
 `;
 
-export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
+export function HomeContainer({ dispatchSongs, songsData, songName, intl, dispatchClearSongsPlaylist }) {
   useInjectSaga({ key: 'homeContainer', saga });
   const [loading, setLoading] = useState(false);
 
@@ -62,6 +63,8 @@ export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
     if (!isEmpty(sName)) {
       dispatchSongs(sName);
       setLoading(true);
+    } else {
+      dispatchClearSongsPlaylist();
     }
   };
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
@@ -78,7 +81,17 @@ export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
         />
       </SearchBoxContainer>
       <MusicBoxContainer>
-        <SoundCard songs={songsData} complete={false} loading={loading} />
+        <For
+          style={{ flexWrap: 'wrap' }}
+          of={songsData}
+          renderItem={(song, index) => {
+            return (
+              <If condition={song.trackId && song.previewUrl}>
+                <SoundCard data-testid="sound-card" key={index} song={song} loading={loading} />
+              </If>
+            );
+          }}
+        />
       </MusicBoxContainer>
     </div>
   );
@@ -88,7 +101,8 @@ HomeContainer.propTypes = {
   intl: PropTypes.object,
   dispatchSongs: PropTypes.func,
   songsData: PropTypes.array,
-  songName: PropTypes.string
+  songName: PropTypes.string,
+  dispatchClearSongsPlaylist: PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({

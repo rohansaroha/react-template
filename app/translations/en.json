@@ -11,5 +11,6 @@
   "repository_full_name": "Repository full name: {fullName}",
   "repository_stars": "Repository stars: {stars}",
   "wednesday_solutions": "Wednesday Solutions",
-  "search_song": "Search any Song"
+  "search_song": "Search any Song",
+  "play_song": "Play full Song"
 }
