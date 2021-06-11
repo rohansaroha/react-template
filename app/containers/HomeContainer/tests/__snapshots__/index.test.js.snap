@@ -50,11 +50,7 @@ exports[`<HomeContainer /> container tests should render and match the snapshot 
       </div>
       <div
         class="HomeContainer__MusicBoxContainer-l0s8pp-1 hrKuyA"
-      >
-        <div
-          data-testid="sound-card"
-        />
-      </div>
+      />
     </div>
   </div>
 </body>

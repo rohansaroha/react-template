@@ -21,4 +21,22 @@ describe('<HomeContainer /> container tests', () => {
     await timeout(500);
     expect(submitSpy).toBeCalled();
   });
+
+  it('should call dispatchClearSongPlaylist on empty change', async () => {
+    const getSongsSpy = jest.fn();
+    const clearSongsSpy = jest.fn();
+    const { getByTestId } = renderProvider(
+      <HomeContainer dispatchClearSongsPlaylist={clearSongsSpy} dispatchSongs={getSongsSpy} />
+    );
+    fireEvent.change(getByTestId('search-box'), {
+      target: { value: 'a' }
+    });
+    await timeout(500);
+    expect(getSongsSpy).toBeCalled();
+    fireEvent.change(getByTestId('search-box'), {
+      target: { value: '' }
+    });
+    await timeout(500);
+    expect(clearSongsSpy).toBeCalled();
+  });
 });

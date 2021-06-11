@@ -1,11 +1,116 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SoundCard /> tests should render and match the snapshot 1`] = `
+exports[`<SoundCard /> tests should ensure that complete data is being displayed 1`] = `
 <body>
   <div>
     <div
+      class="ant-card SoundCard__CustomCard-lvsa1p-0 guwSkq ant-card-bordered"
       data-testid="sound-card"
-    />
+    >
+      <div
+        class="ant-card-body"
+      >
+        <div
+          data-testid="link-track"
+        >
+          <div
+            class="SoundCard__HeaderBox-lvsa1p-2 elgeDp"
+          >
+            <img
+              class="SoundCard__AudioImg-lvsa1p-4 jRZWqW"
+            />
+            <div
+              style="flex: 4;"
+            >
+              <div
+                class="SoundCard__SongPrimary-lvsa1p-3 djMiVS"
+              />
+              <div
+                class="SoundCard__SongSecondary-lvsa1p-5 bBBuVf"
+              />
+              <button
+                class="ant-btn SoundCard__ButtonSong-lvsa1p-7 gQYgvp ant-btn-dangerous"
+                data-testid="play-button"
+                type="button"
+              >
+                <span>
+                  Play full Song
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <audio
+          class="SoundCard__AudioBox-lvsa1p-6 gwtEvh"
+          controls=""
+        >
+          <source />
+        </audio>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`<SoundCard /> tests should match the snapshot when data is loaded  1`] = `
+Array [
+  <div
+    data-testid="link-track"
+  >
+    <div
+      class="SoundCard__HeaderBox-lvsa1p-2 elgeDp"
+    >
+      <img
+        class="SoundCard__AudioImg-lvsa1p-4 fGLDFf"
+      />
+      <div
+        style="flex: 4;"
+      >
+        <div
+          class="SoundCard__SongPrimary-lvsa1p-3 elLIt"
+        />
+        <div
+          class="SoundCard__SongSecondary-lvsa1p-5 bBBuVf"
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<SoundCard /> tests should match the snapshot when data is loading 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card SoundCard__CustomCard-lvsa1p-0 jruUYC ant-card-bordered"
+      data-testid="sound-card"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <div
+          class="ant-skeleton ant-skeleton-active"
+        >
+          <div
+            class="ant-skeleton-content"
+          >
+            <h3
+              class="ant-skeleton-title"
+              style="width: 38%;"
+            />
+            <ul
+              class="ant-skeleton-paragraph"
+            >
+              <li />
+              <li />
+              <li
+                style="width: 61%;"
+              />
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 `;
