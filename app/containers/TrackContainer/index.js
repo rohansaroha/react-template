@@ -10,7 +10,14 @@ import saga from './saga';
 import { trackContainerCreators } from './reducer';
 import { useParams } from 'react-router-dom';
 import SoundCard from 'components/SoundCard';
+import styled from 'styled-components';
 
+const CustomCard = styled.div`
+  && {
+    width: 40%;
+    margin: 0 auto;
+  }
+`;
 export function TrackContainer({ dispatchSong, collectionId, songData }) {
   const params = useParams();
   useInjectSaga({ key: 'trackContainer', saga });
@@ -29,7 +36,11 @@ export function TrackContainer({ dispatchSong, collectionId, songData }) {
     }
   }, []);
 
-  return <SoundCard song={songData[0]} complete={true} loading={loader} />;
+  return (
+    <CustomCard>
+      <SoundCard song={songData[0]} complete={true} loading={loader} />
+    </CustomCard>
+  );
 }
 
 TrackContainer.propTypes = {

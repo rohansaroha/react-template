@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Card, Input, Skeleton, Button } from 'antd';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import If from '@components/If';
+import { useHistory } from 'react-router-dom';
 import { colors, fonts } from '@app/themes';
 import { injectIntl } from 'react-intl';
 import { compose } from 'redux';
@@ -70,13 +71,18 @@ const ButtonSong = styled(Button)`
   }
 `;
 function SoundCard({ song, complete, loading, intl }) {
+  const history = useHistory();
   const ButtonHandler = () => {
     window.location.href = song.trackViewUrl;
   };
   return (
     <CustomCard complete={complete} data-testid="sound-card">
       <Skeleton loading={loading} active>
-        <div onClick={() => history.push(`/track/${song.trackId}`)} data-testid="link-track">
+        <div
+          style={{ cursor: 'pointer' }}
+          onClick={() => history.push(`/track/${song.trackId}`)}
+          data-testid="link-track"
+        >
           <HeaderBox>
             <AudioImg src={song.artworkUrl100} alt={song.trackName} complete={complete} />
             <div style={{ flex: 4 }}>
