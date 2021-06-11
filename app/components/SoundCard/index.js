@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Card, Input, Skeleton, Button } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import If from '@components/If';
 import { colors, fonts } from '@app/themes';
 import { injectIntl } from 'react-intl';
@@ -74,22 +74,22 @@ function SoundCard({ song, complete, loading, intl }) {
     window.location.href = song.trackViewUrl;
   };
   return (
-    <CustomCard complete={complete}>
+    <CustomCard complete={complete} data-testid="sound-card">
       <Skeleton loading={loading} active>
-        <NavLink to={`/track/${song.trackId}`}>
+        <div onClick={() => history.push(`/track/${song.trackId}`)} data-testid="link-track">
           <HeaderBox>
             <AudioImg src={song.artworkUrl100} alt={song.trackName} complete={complete} />
             <div style={{ flex: 4 }}>
               <SongPrimary complete={complete}>{song.trackName}</SongPrimary>
               <SongSecondary>{song.artistName}</SongSecondary>
               <If condition={complete}>
-                <ButtonSong danger onClick={ButtonHandler}>
+                <ButtonSong data-testid="play-button" danger onClick={ButtonHandler}>
                   {intl.formatMessage({ id: 'play_song' })}
                 </ButtonSong>
               </If>
             </div>
           </HeaderBox>
-        </NavLink>
+        </div>
         <AudioBox controls>
           <source src={song.previewUrl} />
         </AudioBox>

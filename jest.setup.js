@@ -15,6 +15,9 @@ jest.mock('react-router-dom', () => ({
       search: '',
       hash: ''
     }
+  }),
+  useParams: jest.fn().mockReturnValue({
+    id: '123'
   })
 }));
 

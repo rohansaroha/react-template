@@ -87,7 +87,7 @@ export function HomeContainer({ dispatchSongs, songsData, songName, intl, dispat
           renderItem={(song, index) => {
             return (
               <If condition={song.trackId && song.previewUrl}>
-                <SoundCard data-testid="sound-card" key={index} song={song} loading={loading} />
+                <SoundCard key={index} song={song} loading={loading} />
               </If>
             );
           }}

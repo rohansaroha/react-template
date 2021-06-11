@@ -29,7 +29,7 @@ export function TrackContainer({ dispatchSong, collectionId, songData }) {
     }
   }, []);
 
-  return <SoundCard data-testid="sound-card" song={songData[0]} complete={true} loading={loader} />;
+  return <SoundCard song={songData[0]} complete={true} loading={loader} />;
 }
 
 TrackContainer.propTypes = {
