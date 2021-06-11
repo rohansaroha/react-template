@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import { Card, Input, Skeleton, Button } from 'antd';
 import { NavLink } from 'react-router-dom';
 import If from '@components/If';
-import { For } from '@components/For';
 import { colors, fonts } from '@app/themes';
+import { injectIntl } from 'react-intl';
+import { compose } from 'redux';
 
-const IfSongContainer = styled(Card)`
+const CustomCard = styled(Card)`
   && {
     padding: 0;
     min-height: ${props => (props.complete ? '22em' : '16em')};
@@ -68,49 +69,39 @@ const ButtonSong = styled(Button)`
     margin: 2rem auto;
   }
 `;
-function SoundCard({ songs, complete, loading }) {
+function SoundCard({ song, complete, loading, intl }) {
+  const ButtonHandler = () => {
+    window.location.href = song.trackViewUrl;
+  };
   return (
-    <div data-testid="sound-card">
-      <For
-        type="array"
-        style={{ flexWrap: 'wrap' }}
-        of={songs}
-        renderItem={(song, index) => {
-          const ButtonHandler = () => {
-            window.location.href = song.trackViewUrl;
-          };
-          return (
-            <IfSongContainer condition={song.trackId && song.previewUrl} key={index} complete={complete}>
-              <Skeleton loading={loading} active>
-                <NavLink to={`/track/${song.trackId}`}>
-                  <HeaderBox>
-                    <AudioImg src={song.artworkUrl100} alt={song.trackName} complete={complete} />
-                    <div style={{ flex: 4 }}>
-                      <SongPrimary complete={complete}>{song.trackName}</SongPrimary>
-                      <SongSecondary>{song.artistName}</SongSecondary>
-                      <If condition={complete}>
-                        <ButtonSong danger onClick={ButtonHandler}>
-                          Play Full Song
-                        </ButtonSong>
-                      </If>
-                    </div>
-                  </HeaderBox>
-                </NavLink>
-                <AudioBox controls>
-                  <source src={song.previewUrl} />
-                </AudioBox>
-              </Skeleton>
-            </IfSongContainer>
-          );
-        }}
-      />
-    </div>
+    <CustomCard complete={complete}>
+      <Skeleton loading={loading} active>
+        <NavLink to={`/track/${song.trackId}`}>
+          <HeaderBox>
+            <AudioImg src={song.artworkUrl100} alt={song.trackName} complete={complete} />
+            <div style={{ flex: 4 }}>
+              <SongPrimary complete={complete}>{song.trackName}</SongPrimary>
+              <SongSecondary>{song.artistName}</SongSecondary>
+              <If condition={complete}>
+                <ButtonSong danger onClick={ButtonHandler}>
+                  {intl.formatMessage({ id: 'search_song' })}
+                </ButtonSong>
+              </If>
+            </div>
+          </HeaderBox>
+        </NavLink>
+        <AudioBox controls>
+          <source src={song.previewUrl} />
+        </AudioBox>
+      </Skeleton>
+    </CustomCard>
   );
 }
 SoundCard.propTypes = {
-  songs: PropTypes.array,
+  intl: PropTypes.object,
+  song: PropTypes.object,
   complete: PropTypes.bool,
   loading: PropTypes.bool
 };
 
-export default SoundCard;
+export default compose(injectIntl)(SoundCard);

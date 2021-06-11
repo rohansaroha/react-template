@@ -7,12 +7,14 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { selectSongName, selectSongsData, selectSongsError } from './selectors';
 import saga from './saga';
 import styled from 'styled-components';
-import { Card, Input, Skeleton, Spin } from 'antd';
+import { Card, Input, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import { homeContainerCreators } from './reducer';
 import SoundCard from '@components/SoundCard';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
+import For from '@components/For';
+import If from '@components/If';
 const { Search } = Input;
 
 const SearchBoxContainer = styled(Card)`
@@ -77,7 +79,17 @@ export function HomeContainer({ dispatchSongs, songsData, songName, intl }) {
         />
       </SearchBoxContainer>
       <MusicBoxContainer>
-        <SoundCard songs={songsData} loading={loading} />
+        <For
+          style={{ flexWrap: 'wrap' }}
+          of={songsData}
+          renderItem={(song, index) => {
+            return (
+              <If condition={song.trackId && song.previewUrl}>
+                <SoundCard data-testid="sound-card" key={index} song={song} loading={loading} />
+              </If>
+            );
+          }}
+        />
       </MusicBoxContainer>
     </div>
   );

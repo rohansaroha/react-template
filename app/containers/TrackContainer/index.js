@@ -5,13 +5,13 @@ import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
-import { selectTrackContainer, selectSongError, selectSongData, selectCollectionId } from './selectors';
+import { selectSongError, selectSongData, selectCollectionId } from './selectors';
 import saga from './saga';
 import { trackContainerCreators } from './reducer';
 import { useParams } from 'react-router-dom';
 import SoundCard from 'components/SoundCard';
 
-export function TrackContainer({ dispatchSong, collectionId, songData, trackContainer }) {
+export function TrackContainer({ dispatchSong, collectionId, songData }) {
   const params = useParams();
   useInjectSaga({ key: 'trackContainer', saga });
   const [loader, setLoader] = useState(false);
@@ -27,25 +27,19 @@ export function TrackContainer({ dispatchSong, collectionId, songData, trackCont
       dispatchSong(params.id);
       setLoader(true);
     }
-  });
+  }, []);
 
-  return (
-    <div data-testid="track-container">
-      <SoundCard songs={songData} complete={true} loading={loader} />
-    </div>
-  );
+  return <SoundCard data-testid="sound-card" song={songData[0]} complete={true} loading={loader} />;
 }
 
 TrackContainer.propTypes = {
   location: PropTypes.object,
   dispatchSong: PropTypes.func,
   collectionId: PropTypes.any,
-  songData: PropTypes.array,
-  trackContainer: PropTypes.any
+  songData: PropTypes.array
 };
 
 const mapStateToProps = createStructuredSelector({
-  trackContainer: selectTrackContainer(),
   collectionId: selectCollectionId(),
   songData: selectSongData(),
   songError: selectSongError()
