@@ -12,6 +12,7 @@ exports[`<SoundCard /> tests should ensure that complete data is being displayed
       >
         <div
           data-testid="link-track"
+          style="cursor: pointer;"
         >
           <div
             class="SoundCard__HeaderBox-lvsa1p-2 elgeDp"
@@ -56,6 +57,7 @@ exports[`<SoundCard /> tests should match the snapshot when data is loaded  1`] 
 Array [
   <div
     data-testid="link-track"
+    style="cursor: pointer;"
   >
     <div
       class="SoundCard__HeaderBox-lvsa1p-2 elgeDp"

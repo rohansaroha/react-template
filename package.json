@@ -11,7 +11,7 @@
     "node": ">=8.15.1"
   },
   "author": "Mac",
-  "homepage": "http://wednesday-solutions.github.io/react-template",
+  "homepage":".",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",

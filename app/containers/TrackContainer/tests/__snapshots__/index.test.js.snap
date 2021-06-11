@@ -4,56 +4,61 @@ exports[`<TrackContainer /> container tests should render and match the snapshot
 <body>
   <div>
     <div
-      class="ant-card SoundCard__CustomCard-lvsa1p-0 guwSkq ant-card-bordered"
-      data-testid="sound-card"
+      class="TrackContainer__CustomCard-sc-2rk64n-0 eEfztH"
     >
       <div
-        class="ant-card-body"
+        class="ant-card SoundCard__CustomCard-lvsa1p-0 guwSkq ant-card-bordered"
+        data-testid="sound-card"
       >
         <div
-          data-testid="link-track"
+          class="ant-card-body"
         >
           <div
-            class="SoundCard__HeaderBox-lvsa1p-2 elgeDp"
+            data-testid="link-track"
+            style="cursor: pointer;"
           >
-            <img
-              alt="'Till I Collapse (feat. Nate Dogg)"
-              class="SoundCard__AudioImg-lvsa1p-4 jRZWqW"
-              src="https://is5-ssl.mzstatic.com/image/thumb/Music115/v4/61/d5/0a/61d50a3d-4a27-187a-d16f-6b8ce4b62560/source/100x100bb.jpg"
-            />
             <div
-              style="flex: 4;"
+              class="SoundCard__HeaderBox-lvsa1p-2 elgeDp"
             >
+              <img
+                alt="'Till I Collapse (feat. Nate Dogg)"
+                class="SoundCard__AudioImg-lvsa1p-4 jRZWqW"
+                src="https://is5-ssl.mzstatic.com/image/thumb/Music115/v4/61/d5/0a/61d50a3d-4a27-187a-d16f-6b8ce4b62560/source/100x100bb.jpg"
+              />
               <div
-                class="SoundCard__SongPrimary-lvsa1p-3 djMiVS"
+                style="flex: 4;"
               >
-                'Till I Collapse (feat. Nate Dogg)
+                <div
+                  class="SoundCard__SongPrimary-lvsa1p-3 djMiVS"
+                >
+                  'Till I Collapse (feat. Nate Dogg)
+                </div>
+                <div
+                  class="SoundCard__SongSecondary-lvsa1p-5 bBBuVf"
+                >
+                  Eminem
+                </div>
+                <button
+                  class="ant-btn SoundCard__ButtonSong-lvsa1p-7 gQYgvp ant-btn-dangerous"
+                  data-testid="play-button"
+                  type="button"
+                >
+                  <span>
+                    Play full Song
+                  </span>
+                </button>
               </div>
-              <div
-                class="SoundCard__SongSecondary-lvsa1p-5 bBBuVf"
-              >
-                Eminem
-              </div>
-              <button
-                class="ant-btn SoundCard__ButtonSong-lvsa1p-7 gQYgvp ant-btn-dangerous"
-                data-testid="play-button"
-                type="button"
-              >
-                <span>
-                  Play full Song
-                </span>
-              </button>
             </div>
           </div>
+          <audio
+            class="SoundCard__AudioBox-lvsa1p-6 gwtEvh"
+            controls=""
+          >
+            <source
+              src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/9e/cb/06/9ecb061b-d98c-575e-6649-cd9d472c1eb9/mzaf_18237082239512341748.plus.aac.p.m4a"
+            />
+          </audio>
         </div>
-        <audio
-          class="SoundCard__AudioBox-lvsa1p-6 gwtEvh"
-          controls=""
-        >
-          <source
-            src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/9e/cb/06/9ecb061b-d98c-575e-6649-cd9d472c1eb9/mzaf_18237082239512341748.plus.aac.p.m4a"
-          />
-        </audio>
       </div>
     </div>
   </div>
