@@ -18,9 +18,13 @@ jobs:
       - run: yarn install
       - run: yarn test -u
       - run: yarn build
-      - name: Deploy static site to S3 bucket
+      - name: Deploy to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --delete
         env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws s3 sync ./build/ s3://react-template-rohan --delete
+          SOURCE_DIR: "build"
 
