@@ -11,6 +11,8 @@ import { trackContainerCreators } from './reducer';
 import { useParams } from 'react-router-dom';
 import SoundCard from 'components/SoundCard';
 import styled from 'styled-components';
+import { Skeleton } from 'antd';
+import If from '@components/If';
 
 const CustomCard = styled.div`
   && {
@@ -38,8 +40,9 @@ export function TrackContainer({ dispatchSong, collectionId, songData }) {
 
   return (
     <CustomCard>
-      <div>hell</div>
-      {/* <SoundCard song={songData[0]} complete={true} loading={loader} /> */}
+      <If condition={!loader}>
+        <SoundCard song={songData[0]} complete={true} />
+      </If>
     </CustomCard>
   );
 }
