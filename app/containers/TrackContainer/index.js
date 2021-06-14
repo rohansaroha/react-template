@@ -38,7 +38,8 @@ export function TrackContainer({ dispatchSong, collectionId, songData }) {
 
   return (
     <CustomCard>
-      <SoundCard song={songData[0]} complete={true} loading={loader} />
+      <div>hell</div>
+      {/* <SoundCard song={songData[0]} complete={true} loading={loader} /> */}
     </CustomCard>
   );
 }
