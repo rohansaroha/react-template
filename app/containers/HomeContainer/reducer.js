@@ -2,7 +2,7 @@ import produce from 'immer';
 import { createActions } from 'reduxsauce';
 import get from 'lodash/get';
 
-export const initialState = { songName: null, songsData: {}, error: null };
+export const initialState = { songName: null, songsData: [], error: null };
 
 export const { Types: homeContainerTypes, Creators: homeContainerCreators } = createActions({
   requestGetSongs: ['songName'],

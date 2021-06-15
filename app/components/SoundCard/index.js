@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Card, Input, Skeleton, Button } from 'antd';
-// import { Link } from 'react-router-dom';
 import If from '@components/If';
 import { useHistory } from 'react-router-dom';
 import { colors, fonts } from '@app/themes';
@@ -106,7 +105,7 @@ function SoundCard({ song, complete, loading, intl }) {
 SoundCard.propTypes = {
   intl: PropTypes.object,
   song: PropTypes.object,
-  complete: PropTypes.bool,
+  complete: PropTypes.string,
   loading: PropTypes.bool
 };
 

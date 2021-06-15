@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import SoundCard from 'components/SoundCard';
 import styled from 'styled-components';
 import If from '@components/If';
+import { Skeleton } from 'antd';
 
 const CustomCard = styled.div`
   && {
@@ -22,28 +23,28 @@ const CustomCard = styled.div`
 export function TrackContainer({ dispatchSong, collectionId, songData }) {
   const params = useParams();
   useInjectSaga({ key: 'trackContainer', saga });
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    if (songData && loader) {
+    if (!collectionId) {
+      dispatchSong(params.id);
+    } else if (params.id !== collectionId) {
+      dispatchSong(params.id);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (songData.length > 0) {
       setLoader(false);
     }
   }, [songData]);
 
-  useEffect(() => {
-    if (params.id !== collectionId) {
-      dispatchSong(params.id);
-      setLoader(true);
-    }
-  }, []);
-
   return (
-    <CustomCard>
-      {/* <div>hell</div> */}
-      <If condition={!loader}>
-        <SoundCard song={songData[0]} complete={true} />
-      </If>
-    </CustomCard>
+    <Skeleton loading={loader}>
+      <CustomCard>
+        <SoundCard song={songData[0]} complete="true" loading={loader} />
+      </CustomCard>
+    </Skeleton>
   );
 }
 

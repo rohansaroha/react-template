@@ -12,5 +12,6 @@
   "repository_stars": "Repository stars: {stars}",
   "wednesday_solutions": "Wednesday Solutions",
   "search_song": "Search any Song",
-  "play_song": "Play full Song"
+  "play_song": "Play full Song",
+  "empty_songs_text": "Search any Song by entering it's name in the SearchBox"
 }

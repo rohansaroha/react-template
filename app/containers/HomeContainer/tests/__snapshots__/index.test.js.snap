@@ -50,7 +50,21 @@ exports[`<HomeContainer /> container tests should render and match the snapshot 
       </div>
       <div
         class="HomeContainer__MusicBoxContainer-l0s8pp-1 hrKuyA"
-      />
+      >
+        <div
+          class="ant-card HomeContainer__CustomCard-l0s8pp-3 dMqnlt ant-card-bordered"
+        >
+          <div
+            class="ant-card-body"
+          >
+            <div
+              class="HomeContainer__TextPrimary-l0s8pp-4 kTgIaH"
+            >
+              Search any Song by entering it's name in the SearchBox
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
